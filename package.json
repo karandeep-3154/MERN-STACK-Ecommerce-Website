@@ -1,0 +1,23 @@
+{
+  "name": "ecommerce-website",
+  "version": "1.0.0",
+  "description": "Eecommerce Website based on MERN STACK",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "type":"module",
+  "keywords": [],
+  "author": "Karandeep Singh",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "env": "^0.0.2",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1"
+  }
+}
