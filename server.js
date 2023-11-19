@@ -3,6 +3,7 @@ import colors from "colors";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./Config/db.js";
+import authRoutes from "./Routes/authRoute.js";
 
 //CONFIGURING ENVIRONMENT
 dotenv.config();
@@ -16,6 +17,9 @@ const app = express();
 //MIDDLEWARE
 app.use(express.json());
 app.use(morgan("dev"));
+
+//Routes
+app.use("/api/v1/auth", authRoutes);
 
 // RESTAPI STARTS
 
