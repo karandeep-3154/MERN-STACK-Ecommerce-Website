@@ -1,9 +1,27 @@
 import React from "react";
 import Layout from "../Components/Layout/Layout";
+import cs from '../Images/contactus.jpeg'
 const Policy = () => {
   return (
-    <Layout>
-      <h1>Policy page</h1>
+    <Layout title={"Privacy Policy"}>
+      <div className="row contactus ">
+        <div className="col-md-6 ">
+          <img
+            src={cs}
+            alt="contactus"
+            style={{ width: "100%" }}
+          />
+        </div>
+        <div className="col-md-4">
+          <p>add privacy policy</p>
+          <p>add privacy policy</p>
+          <p>add privacy policy</p>
+          <p>add privacy policy</p>
+          <p>add privacy policy</p>
+          <p>add privacy policy</p>
+          <p>add privacy policy</p>
+        </div>
+      </div>
     </Layout>
   );
 };
