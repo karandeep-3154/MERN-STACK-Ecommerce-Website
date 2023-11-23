@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Layout from "../../Components/Layout/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "../../Styles/AuthStyles.css";
+import { AuthContext } from "../../context/auth";
 
 const Login = () => {
+  const [Auth, setAuth] = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,9 +26,14 @@ const Login = () => {
       );
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
-         setTimeout(() => {
+         setAuth({
+          ...Auth,
+          user:res.data.user,
+          token:res.data.token
+          } );
+          localStorage.setItem("auth", JSON.stringify(res.data));
            navigate("/");
-         }, 1000); 
+
        
       } else {
         // console.log(res)
@@ -35,7 +42,7 @@ const Login = () => {
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
-    }
+    } 
   };
   return (
     <Layout title="Register - Ecommer App">
