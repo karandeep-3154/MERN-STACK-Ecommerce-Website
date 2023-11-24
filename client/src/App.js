@@ -6,11 +6,15 @@ import Policy from "./Pages/Policy";
 import PageNotFound from "./Pages/PageNotFound";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
+import Dashboard from "./Components/User/Dashboard";
+import ForgotPassword from "./Pages/Auth/ForgotPassword";
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />

@@ -10,12 +10,14 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [answer, setAnswer] = useState("");
   const navigate = useNavigate();
 
   // form function
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(answer)
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/auth/register`,
         {
@@ -24,6 +26,7 @@ const Register = () => {
           password,
           phone,
           address,
+          answer,
         }
       );
       if (res && res.data.success) {
@@ -66,7 +69,7 @@ const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="exampleInputEmaifl1"
               placeholder="Enter Your Email "
               required
             />
@@ -77,7 +80,7 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="form-control"
-              id="exampleInputPassword1"
+              id="examplegInputPassword1"
               placeholder="Enter Your Password"
               required
             />
@@ -88,7 +91,7 @@ const Register = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="exampafleInputEmail1"
               placeholder="Enter Your Phone"
               required
             />
@@ -99,8 +102,19 @@ const Register = () => {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="exampdfsleInputEmail1"
               placeholder="Enter Your Address"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="form-control"
+              id="exampsleInputEmail1"
+              placeholder="Enter Your Favourite Sport"
               required
             />
           </div>

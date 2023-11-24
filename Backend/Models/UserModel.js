@@ -24,12 +24,16 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    answer: {
+      type: String,
+      required: true,
+    },
     role: {
       type: Number,
       default: 0,
     },
   },
-  { timestamps: true }//It will store timestamp when a new user is created
+  { timestamps: true } //It will store timestamp when a new user is created
 );
 
 export default mongoose.model("users", userSchema);
