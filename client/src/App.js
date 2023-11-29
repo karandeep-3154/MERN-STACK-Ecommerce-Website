@@ -7,13 +7,23 @@ import PageNotFound from "./Pages/PageNotFound";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
 import Dashboard from "./Components/User/Dashboard";
+import UserRoute from "./Routes/UserRoute.js";
 import ForgotPassword from "./Pages/Auth/ForgotPassword";
+import AdminDashboard from './Pages/Admin/AdminDashboard.js';
+import AdminRoute from './Routes/AdminRoute.js';
+
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="/dashboard" element={<UserRoute />}>
+          <Route path="user" element={<Dashboard />} />
+        </Route>
+        <Route path="/dashboard" element = {<AdminRoute/>}>
+          <Route path = 'admin' element = {<AdminDashboard/>}/>
+        </Route>
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

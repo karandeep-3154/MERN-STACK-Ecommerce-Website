@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-
+import axios from "axios";
 const AuthContext = createContext();//variable which is shared among diff components
 
 const AuthProvider = ({children}) => {
@@ -7,6 +7,8 @@ const AuthProvider = ({children}) => {
     user: null,
     token: "",
   });
+  //default axios
+  axios.defaults.headers.common["Authorization"] = Auth?.token;
 
   useEffect(() => {
     const data = localStorage.getItem("auth");

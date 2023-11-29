@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import Layout from "../../Components/Layout/Layout";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation} from "react-router-dom";
 import toast from "react-hot-toast";
 import "../../Styles/AuthStyles.css";
 import { AuthContext } from "../../context/auth";
@@ -12,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   // form function
   const handleSubmit = async (e) => {
@@ -32,7 +33,7 @@ const Login = () => {
           token:res.data.token
           } );
           localStorage.setItem("auth", JSON.stringify(res.data));
-           navigate("/");
+           navigate(location.state || "/");//If state has some url in it user will be redirected to it after login otherwise by default to HomePage
 
        
       } else {
