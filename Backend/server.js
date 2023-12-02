@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./Config/db.js";
 import authRoutes from "./Routes/authRoute.js";
+import categoryRoutes from './Routes/categoryRoute.js'
 import cors from 'cors';
 
 //CONFIGURING ENVIRONMENT
@@ -22,6 +23,7 @@ app.use(morgan("dev"));
 
 //Routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/category", categoryRoutes);
 
 // RESTAPI STARTS
 
