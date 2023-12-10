@@ -9,8 +9,9 @@ const HomePage = () => {
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
   const [total, setTotal] = useState(0);
+  const [ftotal, setfTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [gotnew, setgotnew] = useState(true);
+  const [fpage, setfPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   //get all cat
@@ -57,11 +58,30 @@ const HomePage = () => {
       console.log(error);
     }
   };
+  //getTOtal COunt
+  const getfTotal = async () => {
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/product/filter-product-count`
+      ,{
+          checked,
+          radio,
+        });
+      setTotal(data?.total);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (page === 1) return;
     loadMore();
   }, [page]);
+
+  useEffect(() => {
+    if (fpage === 1) return;
+    floadMore();
+  }, [fpage]);
   //load more
   const loadMore = async () => {
     try {
@@ -91,15 +111,18 @@ const HomePage = () => {
     setChecked(all);
   };
   //get filterd product
-  const filterProduct = async () => {
+  const floadMore = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/product/product-filters`,
+        `${process.env.REACT_APP_API}/api/v1/product/product-filters/${fpage}`,
         {
           checked,
           radio,
         }
       );
+      setLoading(false);
+
       setProducts(data?.products);
     } catch (error) {
       console.log(error);
@@ -110,14 +133,14 @@ const HomePage = () => {
   }, [checked.length, radio.length]);
 
   useEffect(() => {
-    if (checked.length || radio.length) filterProduct();
+    if (checked.length || radio.length) floadMore();
   }, [checked, radio]);
 
   return (
     <Layout title={"ALl Products - Best offers "}>
       <div className="container-fluid row mt-3">
-        <div className="col-md-2">
-          <h4 className="text-center">Filter By Category</h4>
+        <div className="col-md-2 mt-5">
+          <h4 className="text-center mt-4">Filter By Category</h4>
           <div className="d-flex flex-column">
             {categories?.map((c) => (
               <Checkbox
@@ -171,15 +194,16 @@ const HomePage = () => {
             ))}
           </div>
           <div className="m-2 p-3">
-            {gotnew && products && products.length < total && (
+            {products && products.length < total &&(!ftotal || (ftotal && products.length < ftotal)) && (
               <button
                 className="btn btn-warning"
                 onClick={(e) => {
                   e.preventDefault();
                   setPage(page + 1);
+                  setfPage(fpage + 1);
                 }}
               >
-                {loading&&gotnew ? "Loading ..." : "Loadmore"}
+                {loading ? "Loading ..." : "Loadmore"}
               </button>
             )}
           </div>

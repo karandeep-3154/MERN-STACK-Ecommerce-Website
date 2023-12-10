@@ -2,6 +2,7 @@ import express from "express";
 import {
   createProductController,
   deleteProductController,
+  fproductCountController,
   getProductController,
   getSingleProductController,
   productCountController,
@@ -45,11 +46,12 @@ router.get("/product-photo/:pid", productPhotoController);
 router.delete("/delete-product/:pid", deleteProductController);
 
 //filter product
-router.post("/product-filters", productFiltersController);
+router.post("/product-filters/:page", productFiltersController);
 
 //product count
 router.get("/product-count", productCountController);
 
+router.post("/filter-product-count", fproductCountController);
 //product per page
 router.get("/product-list/:page", productListController);
 export default router;
